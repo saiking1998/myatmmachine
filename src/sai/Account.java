@@ -1,8 +1,10 @@
 
 package sai;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Account {
+    static Atm atm = new Atm();
     public static  void delay(int n){
         try {
             Thread.sleep(n);
@@ -10,12 +12,14 @@ public class Account {
             e.printStackTrace();
         }
     }
+
     public static void main(String[] args) {
         operations intrf = new operationsimpl();
 
-        int atmnumber = 989898;
-        int atmpinnumber = 12345;
-
+        HashMap<Integer,Integer> accdetails = new HashMap<>();
+        HashMap<Integer,Double> amoutofacc = new HashMap<>();
+        accdetails .put(989898,12345);
+        amoutofacc.put(989898,1278.95);
         Scanner sc = new Scanner(System.in);
         System.out.println("welcome to Atm ");
         String str = "Welcome to the mybank ATM";
@@ -38,9 +42,11 @@ public class Account {
         System.out.print("..");
         delay(200);
         System.out.println();
-        if((atmnumber == atmnum)&& (atmpinnumber==atmpin)){
+        if((accdetails.containsKey(atmnum))&& (accdetails.get(atmnum)==atmpin)){
             System.out.println("Validation done");
-            while(true){
+            double setamt  =amoutofacc.get(atmnum);
+            atm.setBalance(setamt);
+             while(true){
                 System.out.println("option 1 : view the balance");
                 System.out.println("option 2 : withdraw the money");
                 System.out.println("option 3 : deposit the money");
